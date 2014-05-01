@@ -154,8 +154,12 @@ void Application::onMouseButtonDown( SDL_MouseButtonEvent event )
 	{
 		if (event.x < 80)	// Menu
 		{
-			if (event.y < 780 && event.y > 720)
+			std::cout << "es menu";
+			if (event.y < 780 && event.y > 720){
 				pattern = 0;	// case 0 => circle
+				std::cout << "es rodona";
+			}
+				
 
 			else if (event.y < 720 && event.y > 660)
 				pattern = 1;	// case 1 => square
@@ -171,7 +175,8 @@ void Application::onMouseButtonDown( SDL_MouseButtonEvent event )
 		}
 
 		else if (event.x > 100 && event.x < 790 && event.y > 20 && event.y < 790)	// Document
-			setPointtoMatrix(pattern, size, event.x, event.y);			
+			std::cout << "pinta"<<event.x<<", "<<event.y<<"\n";
+			setPointtoMatrix(event.x, event.y);			
 	}
 
 }
@@ -191,12 +196,12 @@ void Application::start()
 	launchLoop(this);
 }
 
-void Application::setPointtoMatrix(unsigned int pattern, unsigned int size, unsigned int posX, unsigned int posY)
+void Application::setPointtoMatrix(unsigned int posX, unsigned int posY)
 {
 	// Aqui hauras d'utilitzar el que hem fet a casa meva
 	unsigned int x = posX;
 	unsigned int y = posY;
-
+	std::cout << "painting with pattern: " << pattern << " and size: " << size << "\n";
 	switch (pattern)
 	{
 		// CIRCLE
@@ -206,14 +211,14 @@ void Application::setPointtoMatrix(unsigned int pattern, unsigned int size, unsi
 					if (sqrt((x - size*0.5) * (x - size*0.5) + (y - size*0.5) * (y - size*0.5)) < size)
 						paintMatrixPos(x, y);
 			break;
-			/*
+			
 			// SQUARE
 		case 1:
-			for (x = 25; x < 55; x++)
-			for (y = img.height - 5 - (i + 1) * arrayBut[i].getHeight(); y < img.height - 35 - i * arrayBut[i].getHeight(); y++)
-				img.setPixel(x, y, butColor);
+			for (x = posX; x < posX+size; x++)
+				for (y = posY; y < posY+size; y++)
+					paintMatrixPos(x, y);
 			break;
-			
+			/*
 			// TRIANGLE
 		case 2:
 			for (x = 10; x < 70; x++)
@@ -240,5 +245,6 @@ void Application::paintMatrixPos(unsigned int x, unsigned int y)
 {
 	// Aqui hauras d'utilitzar el que hem fet a casa meva
 	matrix[x - 100][y - 20] = true;
+	std::cout <<x-100 << ", " << y-20<<"set to true\n";
 
 }

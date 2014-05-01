@@ -14,7 +14,7 @@ class Application
 public:
 
 	/*  NEW VARIABLES  */
-	unsigned int pattern = 0;	// Init in ERASE mode
+	unsigned int pattern = 1;	// Init in ERASE mode
 	unsigned int size = 10;
 
 	static const unsigned int numBut = 4;	// Number total of Buttons
@@ -25,8 +25,8 @@ public:
 
 
 	/*  NEW FUNCTIONS  */
-	void setPointtoMatrix(unsigned int pattern, unsigned int size, unsigned int x, unsigned int y);
-	void paintMatrixPos(unsigned int pattern, unsigned int size);
+	void setPointtoMatrix(unsigned int x, unsigned int y);
+	void paintMatrixPos(unsigned int x, unsigned int y);
 
 
 	//window
