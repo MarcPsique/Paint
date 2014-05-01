@@ -14,18 +14,19 @@ class Application
 public:
 
 	/*  NEW VARIABLES  */
-	unsigned int pattern = 3;	// Init in ERASE mode
-	unsigned int size;
+	unsigned int pattern = 0;	// Init in ERASE mode
+	unsigned int size = 10;
 
 	static const unsigned int numBut = 4;	// Number total of Buttons
 	
 	Button arrayBut[numBut];	// Array where we store the buttons
 
-	bool Matrix[680][760];		// Matrix to print
+	bool matrix[680][760];		// Matrix to print
 
 
 	/*  NEW FUNCTIONS  */
-	void setPointtoMatrix(unsigned int pattern, unsigned int size);
+	void setPointtoMatrix(unsigned int pattern, unsigned int size, unsigned int x, unsigned int y);
+	void paintMatrixPos(unsigned int pattern, unsigned int size);
 
 
 	//window

@@ -27,7 +27,7 @@ void Application::init(void)
 	// Set Matrix to false
 	for (unsigned int x = 0; x < 680; x++)
 		for (unsigned int y = 0; y < 760; y++)
-			Matrix[x][y] = false;
+				matrix[x][y] = false;
 	
 	// Init buttons and associate colours
 	for (unsigned int i = 0; i < numBut; i++)
@@ -97,14 +97,6 @@ void Application::render(void)
 							img.setPixel(x, y, butColor);
 						else if (x - 40 < (img.height - 35 - i * arrayBut[i].getHeight()) - y)
 							img.setPixel(x, y, butColor);
-				/*
-				for (y = 20; y < 35; y++){
-					if (x < 40 && x - 25 > y - 20)
-						img.setPixel(x, y, butColor);
-					else if (x-39 < 35-y)
-						img.setPixel(x, y, butColor);
-				}
-				*/
 				break;
 
 			// ERASE
@@ -120,7 +112,7 @@ void Application::render(void)
 	// Matrix
 	for (x = 0; x < 680; x++)
 		for (y = 0; y < 760; y++)
-			if ( Matrix[x][y] )
+			if ( matrix[x][y] )
 				img.setPixel(x + 100, y + 20, Color::BLACK);
 			else
 				img.setPixel(x + 100, y + 20, Color::WHITE);
@@ -179,7 +171,7 @@ void Application::onMouseButtonDown( SDL_MouseButtonEvent event )
 		}
 
 		else if (event.x > 100 && event.x < 790 && event.y > 20 && event.y < 790)	// Document
-			setPointtoMatrix(pattern, size);			
+			setPointtoMatrix(pattern, size, event.x, event.y);			
 	}
 
 }
@@ -199,9 +191,54 @@ void Application::start()
 	launchLoop(this);
 }
 
-void Application::setPointtoMatrix(unsigned int pattern, unsigned int size)
+void Application::setPointtoMatrix(unsigned int pattern, unsigned int size, unsigned int posX, unsigned int posY)
 {
 	// Aqui hauras d'utilitzar el que hem fet a casa meva
+	unsigned int x = posX;
+	unsigned int y = posY;
 
+	switch (pattern)
+	{
+		// CIRCLE
+		case 0:
+			for (x = posX; x < posX+size; x++)
+				for (y = posY; y < posY+size; y++)
+					if (sqrt((x - size*0.5) * (x - size*0.5) + (y - size*0.5) * (y - size*0.5)) < size)
+						paintMatrixPos(x, y);
+			break;
+			/*
+			// SQUARE
+		case 1:
+			for (x = 25; x < 55; x++)
+			for (y = img.height - 5 - (i + 1) * arrayBut[i].getHeight(); y < img.height - 35 - i * arrayBut[i].getHeight(); y++)
+				img.setPixel(x, y, butColor);
+			break;
+			
+			// TRIANGLE
+		case 2:
+			for (x = 10; x < 70; x++)
+			for (y = img.height - 5 - (i + 1)* arrayBut[i].getHeight(); y < img.height - 35 - i * arrayBut[i].getHeight(); y++)
+			if (x < 40 && x - 10 > y - (img.height - 5 - (i + 1)* arrayBut[i].getHeight()))
+				img.setPixel(x, y, butColor);
+			else if (x - 40 < (img.height - 35 - i * arrayBut[i].getHeight()) - y)
+				img.setPixel(x, y, butColor);
+			break;
+
+			// ERASE
+		case 3:
+			for (x = 15; x < 65; x++)
+			for (y = img.height - 5 - (i + 1)* arrayBut[i].getHeight(); y < img.height - 35 - i * arrayBut[i].getHeight(); y++)
+				img.setPixel(x, y, butColor);
+			break;
+
+			*/
+	}
+
+}
+
+void Application::paintMatrixPos(unsigned int x, unsigned int y)
+{
+	// Aqui hauras d'utilitzar el que hem fet a casa meva
+	matrix[x - 100][y - 20] = true;
 
 }
